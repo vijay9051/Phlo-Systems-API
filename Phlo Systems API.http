@@ -1,0 +1,11 @@
+@Phlo_Systems_API_HostAddress = http://localhost:5015
+
+GET {{Phlo_Systems_API_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{Phlo_Systems_API_HostAddress}}/todos/1
+Accept: application/json
+
+###

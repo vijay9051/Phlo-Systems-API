@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phlo Systems API", "Phlo Systems API.csproj", "{AFE0CDFB-2C9A-4AC6-BD2A-30E4B75157A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFE0CDFB-2C9A-4AC6-BD2A-30E4B75157A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE0CDFB-2C9A-4AC6-BD2A-30E4B75157A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE0CDFB-2C9A-4AC6-BD2A-30E4B75157A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE0CDFB-2C9A-4AC6-BD2A-30E4B75157A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D222B58C-403B-49B7-8140-940F0A26D37B}
+	EndGlobalSection
+EndGlobal
