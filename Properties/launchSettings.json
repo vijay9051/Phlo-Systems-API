@@ -5,7 +5,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "todos",
+      "launchUrl": "products/filter",
       "applicationUrl": "http://localhost:5015",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

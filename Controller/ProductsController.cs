@@ -5,7 +5,6 @@ using System.Text.Json;
 
 namespace Phlo_Systems_API.ProductsController
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -18,8 +17,8 @@ namespace Phlo_Systems_API.ProductsController
             _logger = logger;
         }
 
-        [HttpGet("filter")]
-        public async Task<IActionResult> GetdProductsFiltered([FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, [FromQuery] string? size, [FromQuery] string highlight)
+        [HttpGet("products/filter")]
+        public async Task<IActionResult> GetdProductsFiltered([FromQuery] decimal? minPrice, [FromQuery] decimal? maxPrice, [FromQuery] string? size, [FromQuery] string? highlight)
         {
             try
             {
@@ -36,6 +35,17 @@ namespace Phlo_Systems_API.ProductsController
                     (!maxPrice.HasValue || p.Price <= maxPrice.Value) &&
                     (string.IsNullOrEmpty(size) || p.Sizes.Contains(size, StringComparer.OrdinalIgnoreCase))).ToList();
 
+                //get the  filter product object
+                var filter = new
+                {
+                    MinPrice = filteredProducts.Min(p => p.Price),
+                    MaxPrice = filteredProducts.Max(p => p.Price),
+                    Sizes = filteredProducts.SelectMany(p => p.Sizes).Distinct(),
+                    CommonWords = GetCommonWords(filteredProducts.Select(p => p.Description), 10, 5)
+                };
+
+                //most common words in the  product descriptions, excluding the most common five 
+                var commonWords = GetCommonWords(filter.CommonWords, 10, 5);
 
                 // Highlight words in descriptions
                 if (!string.IsNullOrEmpty(highlight))
@@ -50,22 +60,17 @@ namespace Phlo_Systems_API.ProductsController
                     }
                 }
 
-                //get the  filter product object
-                var filter = new
-                {
-                    MinPrice = data.Products.Min(p => p.Price),
-                    MaxPrice = data.Products.Max(p => p.Price),
-                    Sizes = data.Products.SelectMany(p => p.Sizes).Distinct(),
-                    CommonWords = GetCommonWords(data.Products.Select(p => p.Description), 10, 5)
-                };
-
                 var result = new FilterProducts
                 {
                     filteredProducts = filteredProducts,
-                    minPrice = minPrice,
-                    maxPrice = maxPrice,
-                    size = size,
-                    highlight = highlight.Split(",").ToList(),
+                    filterObject = new FilterObject
+                    {
+                        minPrice = filter.MinPrice,
+                        maxPrice = filter.MaxPrice,
+                        mostCommonWords = commonWords.ToList(),
+                        highlight = string.IsNullOrWhiteSpace(highlight)?null: highlight.Split(",").ToList(),                        
+                        size = size,                        
+                    }                    
                 };
                 _logger.LogDebug("FilterProducts result: {FilterProducts}", result);
 

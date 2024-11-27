@@ -8,9 +8,7 @@ namespace Phlo_Systems_API.Models
     public class FilterProducts
     {
         public List<Product> filteredProducts { get; set; }
-        public decimal? minPrice { get; set; }
-        public decimal? maxPrice { get; set; }
-        public List<string> highlight { get; set; }
-        public string size { get; set; }
+        public FilterObject filterObject { get; set; }
     }
+
 }
